@@ -35,4 +35,8 @@ chmod +x PASTE_HERE_FULL_PATH_OF_SafeSense.desktop
 mv PASTE_HERE_FULL_PATH_OF_SafeSense.desktop ~/.local/share/applications/
 ```
 
+Wiring:
+
+![[Pasted image.png]]\
+
 
