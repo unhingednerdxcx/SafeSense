@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love</title>
+  <style>
+    /* CSS */
+    
+    /* main */
+    :root {
+      --bg-color: #fff8f8;
+    }
+    body {
+      font-family: 'sans-serif' ;
+      display: flex;
+      height: 100vh;
+      background: var(--bg-color);
+    }
+    /* ring */
+    .ring {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: conic-gradient(#ddd 0deg, #ddd 360deg);
+      position: absolute;
+      top: 100px;
+      left: 60px;
+    }
+    .ring:hover {
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+      transition: 0.2s;
+    }
+    .ring:hover .value {
+      color: #000;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+    .ring::before {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: var(--bg-color);
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .value {
+      position: absolute;
+      font-size: 2em;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    /* bars */
+    .bars {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      position: absolute;
+      top: 350px;
+      left: 100px;
+    }
+    .bar {
+      width: 15px;
+      height: 80px;
+      background: #000000;
+      border-radius: 4px;
+      transform-origin: bottom;
+      animation-name: bounce;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+    }
+    .bars:hover .bar {
+        box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease;
+        cursor: pointer;
+        transform: translateY(-10px);
+    }
+    .bars:hover {
+      cursor: pointer;
+      transform: translateY(-10px);
+    }
+    .bars:hover + .db-value {
+      color: #333;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      transform: translateY(-2px);
+      transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.3); }
+    }
+    .db-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+      user-select: none;
+      position: absolute;
+      top: 440px;
+      left: 135px;
+    }
+
+    /* Motion detection */
+    .card {
+      background: var(--bg-color);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 300px;
+      position: absolute;
+      top: 500px;
+      left: 150px;
+      transform: translateX(-50%);
+      z-index: 0; 
+    }
+
+    .circle-wrapper {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px auto;
+      border: 5px solid #000;
+      border-radius: 50%;
+    }
+    .card:hover .circle-wrapper{
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
+    .card:hover .status {
+    transform: translateY(-10px);
+  }
+
+    .indicator {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: gray;
+        box-shadow: 0 0 20px #000;
+        transition: background 0.5s ease, box-shadow 0.5s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+
+    .scanner-dot {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: black;
+        border-radius: 50%;
+        top: 77px;
+        left: 77px;
+        transform: translate(-50%, -50%) rotate(0deg);
+        animation: rotateDot 3s linear infinite;
+    }
+    .status {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+
+    @keyframes rotateDot {
+        0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(75px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(75px) rotate(-360deg); }
+    }
+
+    /* Gauge */
+    
+    .gauge-container {
+      width: 220px;
+      height: 220px;
+      position: absolute;
+      cursor: pointer;
+      top: 90px;
+      left: 1550px;
+    }
+
+    svg {
+      transform: rotate(-90deg);
+      width: 220px;
+      height: 220px;
+    }
+
+    circle.bg {
+      fill: none;
+      stroke: #d1cdcd;
+      stroke-width: 27;
+    }
+
+    circle.fg {
+      fill: none;
+      stroke-linecap: round;
+      stroke-width: 27;
+      stroke: url(#gradient);
+      transition: stroke-dashoffset 1s ease, filter 0.8s ease;
+      filter: drop-shadow(0 0 10px #2ecc71);
+    }
+
+    .value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      font-size: 3.5;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      user-select: none;
+    }
+
+    .unit {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      color: #000000;
+      letter-spacing: 1.2px;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .message {
+      position: absolute;
+      bottom: -1.5rem;
+      width: 100%;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #000000;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .gauge-container:hover {
+      cursor: pointer;
+      transform: translateY(-10px);
+    }
+
+    .gauge-container:hover .value,
+    .gauge-container:hover .unit,
+    .gauge-container:hover .message {
+      color: #000;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <!--HTML-->
+  <div class="ring" id="ring">
+    <div class="value" id="val">--°C</div>
+  </div>
+
+  <div class="bars" id="bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="db-value" id="dbValue">dB: --</div>
+
+   <div class="card">
+    <div class="circle-wrapper">
+      <div class="indicator" id="indicator"></div>
+      <div class="scanner-dot"></div>
+    </div>
+    <div class="status" id="statusText">Not Detected...</div>
+  </div>
+  <div class="gauge-container" aria-label="CO₂ Level Indicator" role="img" aria-live="polite" tabindex="0">
+  <svg viewBox="0 0 220 220" aria-hidden="true">
+    <defs>
+        <linearGradient id="safe" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="blue"/>
+            <stop offset="100%" stop-color="violet"/>
+        </linearGradient>
+
+        <linearGradient id="okay" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="blue"/>
+            <stop offset="100%" stop-color="yellow"/>
+        </linearGradient>
+
+        <linearGradient id="danger" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="yellow"/>
+            <stop offset="100%" stop-color="red"/>
+        </linearGradient>
+    </defs>
+    <circle class="bg" cx="110" cy="110" r="90"/>
+    <circle class="fg" cx="110" cy="110" r="90"/>
+  </svg>
+  <div class="value" id="gauge-value">400</div>
+  <div class="unit">ppm</div>
+  <div class="message" id="gauge-message">Air quality: Good ✅</div>
+</div>
+
+
+
+<script>
+  // JavaScript
+
+  let temp = 12.00;  
+  let currentDb = 167;
+  let gas = 219.00;
+  let dist = 599.00;
+  let lux = 37177; 
+  const maxTemp = 60;
+  const minTemp = -60;
+
+  function interpolate(c1, c2, t) {
+    const a = c1.match(/\d+/g).map(Number);
+    const b = c2.match(/\d+/g).map(Number);
+    return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')})`;
+  }
+
+  function getColor(temp) {
+    if (temp < 0) {
+      let t = Math.min(1, Math.abs(temp) / Math.abs(minTemp));
+      return interpolate("rgb(180,130,255)", "rgb(120,0,180)", t); // purples
+    } else if (temp <= 16) {
+      let t = temp / 16;
+      return interpolate("rgb(0,180,255)", "rgb(0,100,255)", t); // light → dark blue
+    } else if (temp <= 28) {
+      let t = (temp - 16) / (28 - 16);
+      return interpolate("rgb(0,200,0)", "rgb(0,255,100)", t); // greens
+    } else if (temp <= 35) {
+      let t = (temp - 28) / (35 - 28);
+      return interpolate("rgb(255,230,0)", "rgb(255,140,0)", t); // yellow → orange
+    } else if (temp <= 60) {
+      let t = Math.min(1, (temp - 35) / 15);
+      return interpolate("rgb(255,140,0)", "rgb(255,0,0)", t); // orange → red
+    }
+  }
+
+  // Fix: Ensure minimum 1deg for visibility
+  const rawAngle = (Math.abs(temp) / (temp < 0 ? Math.abs(minTemp) : maxTemp)) * 360;
+  const angle = temp === 0 ? 1 : Math.max(1, rawAngle);
+  const color = getColor(temp);
+  const ring = document.getElementById('ring');
+
+  if (temp >= 0) {
+    ring.style.background = `conic-gradient(${color} ${angle}deg, #ddd 0)`;
+  } else {
+    ring.style.background = `conic-gradient(#ddd 0deg, #ddd ${360 - angle}deg, ${color} 0)`;
+  }
+  document.getElementById('val').textContent = `${temp}°C`;
+
+  // Bars
+  const bars = document.querySelectorAll('.bar');
+  const dbValue = document.getElementById('dbValue');
+
+  // Function to set animation speeds based on dB value (0 to 100)
+  // Higher dB → faster bars (shorter animation durations)
+  function setDb(dB) {
+      dbValue.textContent = `dB: ${dB}`;
+
+      // Map dB (30 to 100) to animation durations (2s slow to 0.3s fast)
+      const minDb = 0;
+      const maxDb = 100;
+      const clampedDb = Math.min(Math.max(dB, minDb), maxDb);
+      const ratio = (clampedDb - minDb) / (maxDb - minDb);
+      const minDuration = 0.3;
+      const maxDuration = 2;
+
+      bars.forEach((bar, i) => {
+      // For some variation, offset duration by a small random factor (+/- 0.3s)
+      const variation = (Math.random() * 0.6) - 0.3; // -0.3 to +0.3
+      let duration = maxDuration - ratio * (maxDuration - minDuration) + variation;
+      duration = Math.min(Math.max(duration, minDuration), maxDuration);
+      bar.style.animationDuration = duration.toFixed(2) + 's';
+      });
+  }
+
+  
+  setDb(currentDb);
+
+  // Motion detection
+
+
+  function updateDistance(distance) {
+      const indicator = document.getElementById('indicator');
+      const status = document.getElementById('statusText');
+
+      let color, glow, label;
+
+      if (distance < 0) {
+        color = 'gray';
+        glow = '0 0 30px gray';
+        label = 'ERROR: INVALID DISTANCE';
+      }
+      else if (distance <= 20) {
+        color = 'red';
+        glow = '0 0 30px red';
+        label = 'DANGER VERY CLOSE';
+      } else if (distance <= 40) {
+        color = 'yellow';
+        glow = '0 0 30px yellow';
+        label = 'CLOSE';
+      } else if (distance <= 50) {
+        color = 'limegreen';
+        glow = '0 0 30px limegreen';
+        label = 'APPROACHING';
+      } else if (distance <= 60) {
+        color = 'deepskyblue';
+        glow = '0 0 30px deepskyblue';
+        label = 'SAFE DISTANCE';
+      } else if (distance <= 750) {
+        color = 'violet';
+        glow = '0 0 30px violet';
+        label = 'DONT WORRY! SENSOR DETECTED WALL';
+      }
+      else if (distance > 750) {
+        color = 'gray';
+        glow = '0 0 20px gray';
+        label = 'SAFE';
+      }
+      else {
+        color = 'gray';
+        glow = '0 0 20px gray';
+        label = 'ERROR: INVALID DISTANCE OR WAITING FOR DATA';
+      }
+      indicator.style.background = color;
+      indicator.style.boxShadow = glow;
+      status.textContent = `Distance: ${distance}cm — ${label}`;
+    }
+    updateDistance(dist); // change
+
+    // Gauge
+
+    const fgCircle = document.querySelector('circle.fg');
+    const circumference = 2 * Math.PI * 90;
+    fgCircle.style.strokeDasharray = circumference;
+    const valueEl = document.getElementById('gauge-value');
+    const messageEl = document.getElementById('gauge-message');
+    const maxCO2 = 2000;
+
+    function updateGauge(value) {
+        if (isNaN(value) || value < 0) value = 0;
+
+        // Show exact value text even if above maxCO2
+        valueEl.textContent = value;
+
+        // For stroke animation, cap value at maxCO2
+        const cappedValue = value > maxCO2 ? maxCO2 : value;
+
+        const percent = cappedValue / maxCO2;
+        const offset = circumference * (1 - percent);
+        fgCircle.style.strokeDashoffset = offset;
+
+        // Update message and glow color
+        if (value < 0) {
+            messageEl.textContent = 'ANALOGUE ERROR';
+            fgCircle.style.stroke = '#e74c3c';
+            fgCircle.style.filter = 'drop-shadow(0 0 20px #ffffff)';
+            fgCircle.style.strokeDashoffset = circumference;
+            return;
+        } else if (value <= 800) {
+            messageEl.textContent = '';
+            fgCircle.style.stroke = 'url(#safe)';
+            fgCircle.style.filter = 'drop-shadow(0 0 10px #ffffff)';
+        } else if (value <= 1200) {
+            messageEl.textContent = '';
+            fgCircle.style.stroke = 'url(#okay)';
+            fgCircle.style.filter = 'drop-shadow(0 0 15px #ffffff)';
+        } else {
+            messageEl.textContent = '';
+            fgCircle.style.stroke = 'url(#danger)';
+            fgCircle.style.filter = 'drop-shadow(0 0 20px #ffffff)';
+        }
+
+    }
+
+    updateGauge(gas); // change this value to test
+
+    // Click or keyboard enter to update value
+    gaugeContainer.addEventListener('click', () => {
+        let input = prompt('Enter CO₂ value (ppm, 0 or more):', valueEl.textContent);
+        let val = parseInt(input, 10);
+        if (!isNaN(val)) {
+        updateGauge(val);
+        }
+    });
+
+  gaugeContainer.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      gaugeContainer.click();
+    }
+  });
+  
+</script>
+
+</body>
+</html>
+

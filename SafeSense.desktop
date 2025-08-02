@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=SafeSense
+Exec=FULL PATH OF SafeSense.sh
+Path=FULL PATH OF SafeSense folder
+Icon=FULL PATH OF SafeSense.png
+Terminal=false
+Type=Application
+Categories=Utility;
