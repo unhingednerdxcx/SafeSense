@@ -1,8 +1,18 @@
-Hi! This is my first time making a project like this so bear with me. I will get right to the chase to not waste your time! By the way, this is made to be viewed in obsidian, and this is for Linux users only.
+Hi! This is my first time making a project like this so bear with me. I will get right to the chase to not waste your time! 
+
+## Notes:
+
+1. This is for Linux users only.
 
 ## Why this project?
 
 This project is for measuring sensitivity for people who struggle with SPD (Sensory Processing Disorder). SPD is a symptom of autism and many other neurodivergent illnesses. So if you struggle with SPD and want to also make something, this repo is for you.
+
+## Features/what it will do:
+1. Collects data from gas, tempearature, sound and ultrasonic sensors.
+2. It then displays the results on a web through a local python file in your computer (`Shield.py`)
+3. Then it will display this result on a LCD screen and a buzzer
+4. It usses RTOS to ensure workload is distributed
 
 ## What you need:
 
@@ -38,5 +48,10 @@ mv PASTE_HERE_FULL_PATH_OF_SafeSense.desktop ~/.local/share/applications/
 ## Wiring:
 
 ![wirring](Pastedimage.png)
+
+## Future ideas:
+1. Adding support for I/O sound sensors
+2. Adding light sensors
+3. Adding support for Windows and MacOS
 
 
