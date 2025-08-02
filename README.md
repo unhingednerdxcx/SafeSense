@@ -37,6 +37,6 @@ mv PASTE_HERE_FULL_PATH_OF_SafeSense.desktop ~/.local/share/applications/
 
 Wiring:
 
-![wirring](Pasted image.png)
+![wirring](Pastedimage.png)
 
 
