@@ -30,7 +30,7 @@ float b = -0.42, m = -0.36;
 const char* ssid = "PUT NAME/SSID IN HERE";  // <--- Adjust this
 const char* password = "PUT PASSWORD IN HERE"; // <--- Adjust this
 
-const char* host = "192.168.18.13";  // ← your PC IP
+const char* host = "XXX.XXX.XX.XX";  // ← your PC IP
 const uint16_t port = 12245;
 bool core_0_task = false;
 bool core_1_task = false;
