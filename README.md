@@ -4,6 +4,7 @@ Hi! This is my first time making a project like this so bear with me. I will get
 
 1. This is for Linux users only.
 2. This project can be easily modded
+3. COMPATIBLITY AT THE END
 
 ## Why this project?
 
@@ -50,9 +51,13 @@ mv PASTE_HERE_FULL_PATH_OF_SafeSense.desktop ~/.local/share/applications/
 
 ![wirring](Pastedimage.png)
 
+## compatibility
+
+For linux/MACOS use the .desktop
+For WIndows double click the batch file `run.bat`
+
 ## Future ideas:
 1. Adding support for I/O sound sensors
 2. Adding light sensors
-3. Adding support for Windows and MacOS
 
 
