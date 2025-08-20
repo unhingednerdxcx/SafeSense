@@ -1,2 +1,2 @@
 #!/bin/zsh
-python3 Main.py
+python3 SafeSense.py
