@@ -2,9 +2,8 @@ Hi! This is my first time making a project like this so bear with me. I will get
 
 ## Notes:
 
-1. This is for Linux users only.
-2. This project can be easily modded
-3. COMPATIBLITY AT THE END
+1. This project can be easily modded
+2. COMPATIBLITY AT THE END
 
 ## Why this project?
 
